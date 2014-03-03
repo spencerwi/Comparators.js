@@ -1,0 +1,19 @@
+{
+  "name": "comparators",
+  "version": "0.1.0",
+  "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
+  "main": "comparators.js",
+  "scripts": {
+    "test": "jasmine-node comparators.spec.js"
+  },
+  "keywords": [
+    "comparator",
+    "sort",
+    "array"
+  ],
+  "author": "Spencer Williams",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine-node": "~1.13.1"
+  }
+}
