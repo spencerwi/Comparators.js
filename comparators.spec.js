@@ -1,6 +1,6 @@
 if (typeof window === "undefined"){
+    /* Running from a console spec runner in node */
     Comparators = require('./comparators.js');
-    console.log(Comparators);
 }
 
 describe("comparing", function(){
