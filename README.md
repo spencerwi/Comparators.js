@@ -1,6 +1,8 @@
 Comparators.js
 ==============
 
+[![Build Status](https://travis-ci.org/spencerwi/Comparators.js.png?branch=master)](https://travis-ci.org/spencerwi/Comparators.js)
+
 Java8-style chainable comparators for Javascript
 
 
