@@ -1,4 +1,7 @@
-require("./comparators.js");
+if (typeof window === "undefined"){
+    Comparators = require('./comparators.js');
+    console.log(Comparators);
+}
 
 describe("comparing", function(){
     it("can take an attribute as a string to use as a comparator", function(){
