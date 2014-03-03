@@ -3,28 +3,32 @@ if (typeof window === "undefined"){
     Comparators = require('./comparators.js');
 }
 
-describe("comparing", function(){
-    it("can take an attribute as a string to use as a comparator", function(){
-        var comparatorMethod = Comparators.comparing("name");
-        var shouldBeFirst  = {"name": "A"},
-            shouldBeSecond = {"name": "B"},
-            shouldBeThird  = {"name": "C"};
+describe("Comparator", function(){
+    describe(".comparing(attr)", function(){
+        it("can take an attribute as a string to use as a comparator", function(){
+            var comparatorMethod = Comparators.comparing("name");
+            var shouldBeFirst  = {"name": "A"},
+                shouldBeSecond = {"name": "B"},
+                shouldBeThird  = {"name": "C"};
 
-        var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
-        var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
-        expect(beforeSort.sort(comparatorMethod)).toEqual(expected);
+            var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            var actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        });
     });
-});
 
-describe("thenComparing", function(){
-    it("chains from a comparator created by 'comparing'", function(){
-        var comparatorMethod = Comparators.comparing("lastName").thenComparing("firstName");
-        var shouldBeFirst  = {"lastName": "A", "firstName": "A"},
-            shouldBeSecond = {"lastName": "A", "firstName": "B"},
-            shouldBeThird  = {"lastName": "C", "firstName": "C"};
+    describe(".thenComparing(attr)", function(){
+        it("chains from a comparator created by '.comparing(attr)'", function(){
+            var comparatorMethod = Comparators.comparing("lastName").thenComparing("firstName");
+            var shouldBeFirst  = {"firstName": "A", "lastName": "A"},
+                shouldBeSecond = {"firstName": "B", "lastName": "A"},
+                shouldBeThird  = {"firstName": "C", "lastName": "C"};
 
-        var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
-        var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
-        expect(beforeSort.sort(comparatorMethod)).toEqual(expected);
+            var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            var actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        });
     });
 });
