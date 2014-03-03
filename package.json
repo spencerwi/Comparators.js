@@ -1,5 +1,5 @@
 {
-  "name": "comparators",
+  "name": "Comparators.js",
   "version": "0.1.0",
   "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
   "main": "comparators.js",
