@@ -1,22 +1,35 @@
-(function(){
+(function(name, definition){
+    /* Sweet module-wrapper code courtesy of https://github.com/ded/ (via StackOverflow) -- weird humor value-added */
+    if (typeof module != 'undefined') {
+        /* When in CommonJS, do as the Commoners do */
+        module.exports = definition();
+    } else if (typeof define == 'function' && typeof define.amd == 'object'){
+        /* All Men Die */
+        define(definition);
+    } else {
+        /* Browser's Castle */
+        this[name] = definition();
+    }
+}('Comparators', function(){
     var buildComparator = function(attr){
         var comparatorFunction = function(first, second){
-            if      (first[attr] > second[attr]) { return  1; }
-            else if (first[attr] < second[attr]) { return -1; }
-            else                                 { return  0; }
+            var result;
+            if      (first[attr] > second[attr]) { result =  1; }
+            else if (first[attr] < second[attr]) { result = -1; }
+            else {
+                if (comparatorFunction.next == undefined) { result = 0;} 
+                else                                      { result = comparatorFunction.next(first, second); }
+            }
+            return result;
         };
-        comparatorFunction.thenComparing = buildComparator;
+        comparatorFunction.thenComparing = function(attr){
+            comparatorFunction.next = buildComparator(attr);
+            return comparatorFunction;
+        }
         return comparatorFunction;
     }
 
-    var Comparators = {
-        comparing: function(attr){ return buildComparator(attr); }   
+    return {
+        comparing: buildComparator
     };
-    if (typeof exports !== 'undefined') {
-        /* When in CommonJS, do as the Commoners do */
-        exports.comparing = Comparators.comparing;
-    } else {
-        /* Browser's Castle */
-        window.Comparators = Comparators;
-    }
-})();
+}));
