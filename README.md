@@ -18,9 +18,9 @@ people.sort(
 );
 ```
 
-At [work](http://siftit.com/), I've run across situations where I need multi-key sorts in my Backbone collections -- which can sort themselves if given a function of the same signature as those used by [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+At [work](http://siftit.com/), I've run across situations where I need multi-key sorting in my Backbone collections  -- which can sort themselves using the same type of comparator function as [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) expects.
 
-So the simple solution (for me) was to write an easy-to-read
+So the simplest solution for me was to bridge this interest and this need by writing a Javascript comparator-function generator with the same(ish) syntax as the upcoming Java8 Comparator interface.
 
 
 Usage and examples
@@ -31,9 +31,9 @@ Directly translating our above Java 8 code, we could do the following:
 ```javascript
 /* Demo data */
 var people = [
-  {lastName: "Baggins", firstName: "Bilbo"},
+  {lastName: "Baggins", firstName: "Frodo"},
   {lastName: "Gamgee",  firstName: "Samwise"},
-  {lastName: "Baggins", firstName: "Frodo"}
+  {lastName: "Baggins", firstName: "Bilbo"}
 ];
 
 sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firstName"));
@@ -42,7 +42,7 @@ sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firs
 [
   {lastName: "Baggins", firstName: "Bilbo"},
   {lastName: "Baggins", firstName: "Frodo"},
-  {lastName: "Gamgee",  firstName: "Samwise"}
+  {lastName: "Gamgee",  firstName: "Samwise"},
 ]; 
 */
 ```
@@ -50,17 +50,24 @@ sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firs
 Where and how can I use it?
 ---------------------------
 
-It works in the browser and in anything that handles CommonJS modules.
+It works in the browser without a module system, as a CommonJS module, and as an AMD module.
 
-In the browser, include `comparators.js` in a script tag:
+The simplest (but global-namespace-polluting) way to use it is to include `comparators.js` in a script tag:
 
 ```html
 <script type="text/javascript" src="comparators.js"></script>
 ```
 
-In node, just `require` it:
+In node/CommonJS loaders, just `require` it:
 
 ```javascript
 var Comparators = require("Comparators.js");
 ```
 
+It works similarly in AMD loaders ([require.js](http://requirejs.org) used in the below example):
+
+```javascript
+require(['Comparators'], function(Comparators){
+  /* Do a thing! */
+});
+```
