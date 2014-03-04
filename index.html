@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Comparators.js by example.</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+  <link href="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.css" rel="stylesheet"/>
+  <!-- Jasmine files -->
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/boot.js"></script>
+  <script type="text/javascript" src="comparators.js"></script>
+  <script>
+  function require() { /* no-op so a require in my spec file doesn't break */ } 
+  </script>
+  <script type="text/javascript" src="comparators.spec.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="comparators-js">Comparators.js</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> window === <span class="hljs-string">"undefined"</span>){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>If we’re in a console (where <code>window</code> is undefined) it’s probably node, so require the module.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    Comparators = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./comparators.js'</span>);
+}
+
+describe(<span class="hljs-string">"Comparators"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    describe(<span class="hljs-string">".comparing(attr|fn)"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2 id="creating-an-attr-comparator">Creating an “attr” comparator</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">"accepts a string specifying the name of the attribute to use for comparison"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+            <span class="hljs-keyword">var</span> shouldBeFirst  = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"A"</span>},
+                shouldBeSecond = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"B"</span>},
+                shouldBeThird  = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"C"</span>};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>We can specify that we want to compare our demo objects by name simply by passing
+ the string <code>&quot;name&quot;</code> to <code>.comparing</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> comparatorMethod = Comparators.comparing(<span class="hljs-string">"name"</span>);
+
+
+            <span class="hljs-keyword">var</span> expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            <span class="hljs-keyword">var</span> beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            <span class="hljs-keyword">var</span> actual = beforeSort.sort(comparatorMethod);
+
+            expect(actual).toEqual(expected);
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="creating-a-fn-comparator">Creating a “fn” comparator</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">"accepts an 'attribute-extractor' function that returns the attribute to use for comparison"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+            <span class="hljs-keyword">var</span> shouldBeFirst  = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"short"</span>},
+                shouldBeSecond = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"pretty long"</span>},
+                shouldBeThird  = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"definitely the longest"</span>};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>If the comparison key is a calculated value (or something that’s not a direct property of each object in the array),
+ we can create a chainable comparator that generates the comparison key using an anonymous function.
+In this example, we want to sort by name length (largest to smallest)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> comparatorMethod = Comparators.comparing(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(each)</span>{</span>
+                <span class="hljs-keyword">return</span> each.name.length;
+            });
+
+            <span class="hljs-keyword">var</span> expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            <span class="hljs-keyword">var</span> beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            <span class="hljs-keyword">var</span> actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        })
+    });
+
+    describe(<span class="hljs-string">".thenComparing(attr|fn)"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <h2 id="chaining-with-an-attr-comparator">Chaining with an “attr” comparator</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">"chains from '.comparing(attr|fn)' and accepts an attribute-name string"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>As with <code>.comparing(attr)</code>, we can specify a comparison-key attribute just by passing in the
+ attribute name as a string.
+The advantage of <code>thenComparing(attr)</code> is that it lets us easily define a hierarchical multi-key sort.</p>
+<p>In this case, we sort alphabetically by lastName, then by firstName — like an old phone book.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> comparatorMethod = Comparators.comparing(<span class="hljs-string">"lastName"</span>).thenComparing(<span class="hljs-string">"firstName"</span>);
+            <span class="hljs-keyword">var</span> shouldBeFirst  = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"A"</span>, <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"A"</span>},
+                shouldBeSecond = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"B"</span>, <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"A"</span>},
+                shouldBeThird  = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"C"</span>, <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"C"</span>};
+
+            <span class="hljs-keyword">var</span> expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            <span class="hljs-keyword">var</span> beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            <span class="hljs-keyword">var</span> actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h2 id="chaining-with-a-fn-comparator">Chaining with a “fn” comparator</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        it(<span class="hljs-string">"chains from '.comparing(attr|fn)' and accepts an attribute-extractor function"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>And as with <code>.comparing(fn)</code>, we can pass in a function that returns the comparison key
+ when given each element of the method as a parameter. Functors are neat!</p>
+<p>This example also demonstrates that <code>(attr)</code> and <code>(fn)</code> comparators can be mixed-and-matched
+ to produce the desired results.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> comparatorMethod = Comparators.comparing(<span class="hljs-string">"lastName"</span>).thenComparing(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(each)</span>{</span>
+                <span class="hljs-keyword">return</span> each.firstName.length;
+            });
+            <span class="hljs-keyword">var</span> shouldBeFirst  = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"short"</span>,             <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"A"</span>},
+                shouldBeSecond = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"Rather long"</span>,       <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"A"</span>},
+                shouldBeThird  = {<span class="hljs-string">"firstName"</span>: <span class="hljs-string">"Irrelevant length"</span>, <span class="hljs-string">"lastName"</span>: <span class="hljs-string">"C"</span>};
+
+            <span class="hljs-keyword">var</span> expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            <span class="hljs-keyword">var</span> beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            <span class="hljs-keyword">var</span> actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        })
+    });
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
