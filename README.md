@@ -18,7 +18,9 @@ people.sort(
 );
 ```
 
-At [work](http://siftit.com/), I've run across situations where I need chainable comparators in my Backbone collections (which can use the same type of function as [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) expects.
+At [work](http://siftit.com/), I've run across situations where I need multi-key sorts in my Backbone collections -- which can sort themselves if given a function of the same signature as those used by [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+So the simple solution (for me) was to write an easy-to-read
 
 
 Usage and examples
@@ -29,18 +31,18 @@ Directly translating our above Java 8 code, we could do the following:
 ```javascript
 /* Demo data */
 var people = [
-  {lastName: "Williams", firstName: "Emma"},
-  {lastName: "Williams", firstName: "Spencer"},
-  {lastName: "Beard", firstName: "Amanda"}
+  {lastName: "Baggins", firstName: "Bilbo"},
+  {lastName: "Gamgee",  firstName: "Samwise"},
+  {lastName: "Baggins", firstName: "Frodo"}
 ];
 
 sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firstName"));
 
 /* sortedPeople is now:
 [
-  {lastName: "Beard", firstName: "Amanda"},
-  {lastName: "Williams", firstName: "Emma"},
-  {lastName: "Williams", firstName: "Spencer"}
+  {lastName: "Baggins", firstName: "Bilbo"},
+  {lastName: "Baggins", firstName: "Frodo"},
+  {lastName: "Gamgee",  firstName: "Samwise"}
 ]; 
 */
 ```
