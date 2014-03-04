@@ -47,6 +47,8 @@ sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firs
 */
 ```
 
+For more examples (and tests!), see the [project page](http://spencerwi.github.io/Comparators.js)
+
 Where and how can I use it?
 ---------------------------
 
