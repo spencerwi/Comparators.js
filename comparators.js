@@ -11,17 +11,28 @@
         this[name] = definition();
     }
 }('Comparators', function(){
-    var buildComparator = function(attr){
-        var comparatorFunction = function(first, second){
-            var result;
-            if      (first[attr] > second[attr]) { result =  1; }
-            else if (first[attr] < second[attr]) { result = -1; }
-            else {
-                if (comparatorFunction.next == undefined) { result = 0;} 
-                else                                      { result = comparatorFunction.next(first, second); }
-            }
-            return result;
-        };
+    var buildComparator = function(attrOrFunction){
+        var comparatorFunction;
+        if(typeof attrOrFunction === "function"){
+            comparatorFunction = function(first, second){
+                var result = attrOrFunction(first, second);
+                if ((result === 0) && (comparatorFunction.next != undefined)){
+                    result = comparatorFunction.next(first, second);
+                }
+                return result;
+            };
+        } else {
+            comparatorFunction = function(first, second){
+                var result;
+                if      (first[attrOrFunction] > second[attrOrFunction]) { result =  1; }
+                else if (first[attrOrFunction] < second[attrOrFunction]) { result = -1; }
+                else {
+                    if (comparatorFunction.next == undefined) { result = 0;} 
+                    else                                      { result = comparatorFunction.next(first, second); }
+                }
+                return result;
+            };
+        }
         comparatorFunction.thenComparing = function(attr){
             comparatorFunction.next = buildComparator(attr);
             return comparatorFunction;
