@@ -16,7 +16,6 @@
         var comparatorFunction = function(first, second){
             var result = 0,
                 valFirst, valSecond;
-
             if (typeof attrOrFunction === "function"){
                 valFirst = attrOrFunction(first);
                 valSecond = attrOrFunction(second);
@@ -33,9 +32,10 @@
             return result;
         };
 
-        comparatorFunction.thenComparing = function(attr){
-            comparatorFunction.next = buildComparator(attr);
-            return comparatorFunction;
+        var lastStepInComparisonChain = comparatorFunction;
+        comparatorFunction.thenComparing = function(attrOrFunction){
+            lastStepInComparisonChain = lastStepInComparisonChain.next = buildComparator(attrOrFunction);
+            return this;
         }
 
         return comparatorFunction;

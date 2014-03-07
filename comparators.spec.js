@@ -85,5 +85,25 @@ describe("Comparators", function(){
             var actual = beforeSort.sort(comparatorMethod);
             expect(actual).toEqual(expected);
         })
+
+        // Multiple chains
+        // ---------------
+        it("can chain multiple comparison keys", function(){
+            // Any point in the chain can be further chained, allowing you to easily
+            //  create complex, multi-attribute comparison functions.
+            var comparatorMethod = Comparators.comparing("lastName")
+                                                .thenComparing("firstName")
+                                                .thenComparing("age");
+
+            var shouldBeFirst   = {lastName: "A", firstName: "A", age:24},
+                shouldBeSecond  = {lastName: "A", firstName: "A", age:25},
+                shouldBeThird   = {lastName: "A", firstName: "B", age:24},
+                shouldBeFourth  = {lastName: "B", firstName: "A", age:24}
+
+            var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird, shouldBeFourth];
+            var beforeSort = [shouldBeThird, shouldBeFourth, shouldBeSecond, shouldBeFirst];
+            var actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        });
     });
 });
