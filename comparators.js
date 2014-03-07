@@ -12,36 +12,34 @@
     }
 }
 ('Comparators', function(){
-    var buildComparator = function(attrOrFunction){
-        var comparatorFunction = function(first, second){
-            var result = 0,
-                valFirst, valSecond;
+    var buildComparisonStep = function(attrOrFunction){
+        var comparatorFunction = function(firstItem, secondItem){
+            var result, comparisonValueOfFirstItem, comparisonValueOfSecondItem;
             if (typeof attrOrFunction === "function"){
-                valFirst = attrOrFunction(first);
-                valSecond = attrOrFunction(second);
+                comparisonValueOfFirstItem  = attrOrFunction(firstItem);
+                comparisonValueOfSecondItem = attrOrFunction(secondItem);
             } else {
-                valFirst = first[attrOrFunction];
-                valSecond = second[attrOrFunction];
+                comparisonValueOfFirstItem  = firstItem[attrOrFunction];
+                comparisonValueOfSecondItem = secondItem[attrOrFunction];
             }
 
-            if      (valFirst > valSecond) { result =  1; }
-            else if (valFirst < valSecond) { result = -1; }
+            if      (comparisonValueOfFirstItem > comparisonValueOfSecondItem) { result =  1; }
+            else if (comparisonValueOfFirstItem < comparisonValueOfSecondItem) { result = -1; }
             else {
-                if (comparatorFunction.next != undefined) {  result = comparatorFunction.next(first, second); } 
+                if (comparatorFunction.nextStep != undefined) {  result = comparatorFunction.nextStep(firstItem, secondItem); } 
+                else { result = 0; }
             }
             return result;
         };
 
         var lastStepInComparisonChain = comparatorFunction;
         comparatorFunction.thenComparing = function(attrOrFunction){
-            lastStepInComparisonChain = lastStepInComparisonChain.next = buildComparator(attrOrFunction);
+            lastStepInComparisonChain = lastStepInComparisonChain.nextStep = buildComparisonStep(attrOrFunction);
             return this;
         }
 
         return comparatorFunction;
     }
 
-    return {
-        comparing: buildComparator
-    };
+    return { comparing: buildComparisonStep };
 }));
