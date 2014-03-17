@@ -61,10 +61,10 @@ The simplest (but global-namespace-polluting) way to use it is to include `compa
 <script type="text/javascript" src="comparators.min.js"></script>
 ```
 
-In node/CommonJS loaders, just `require` it:
+In node/CommonJS loaders, just `require` it (it's available on NPM as [`comparators`](https://www.npmjs.org/package/comparators)):
 
 ```javascript
-var Comparators = require("comparators.min.js");
+var Comparators = require("comparators");
 ```
 
 It works similarly in AMD loaders ([require.js](http://requirejs.org) used in the below example):
