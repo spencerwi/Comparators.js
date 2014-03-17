@@ -1,13 +1,13 @@
-/* Sweet module-wrapper code courtesy of https://github.com/ded/ (via StackOverflow) -- weird humor value-added */
+/* Comparators.js 1.0.0 
+ * http://spencerwi.github.io/Comparators.js
+ * (c) 2014 Spencer Williams
+ * Comparators.js may be freely distributed under the MIT license. */
 (function(name, definition){
     if (typeof module != 'undefined') {
-        /* When in CommonJS, do as the Commoners do */
         module.exports = definition();
     } else if (typeof define == 'function' && typeof define.amd == 'object'){
-        /* All Men Die */
         define(definition);
     } else {
-        /* Browser's Castle */
         this[name] = definition();
     }
 }
