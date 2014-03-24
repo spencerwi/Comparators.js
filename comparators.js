@@ -12,7 +12,8 @@
     }
 }
 ('Comparators', function(){
-    var buildComparisonStep = function(attrOrFunction){
+    var buildComparisonStep = function(attrOrFunction, opts){
+        var reversed = (opts && opts.reversed);
         var comparatorFunction = function(firstItem, secondItem){
             var result, comparisonValueOfFirstItem, comparisonValueOfSecondItem;
             if (typeof attrOrFunction === "function"){
@@ -23,8 +24,14 @@
                 comparisonValueOfSecondItem = secondItem[attrOrFunction];
             }
 
-            if      (comparisonValueOfFirstItem > comparisonValueOfSecondItem) { result =  1; }
-            else if (comparisonValueOfFirstItem < comparisonValueOfSecondItem) { result = -1; }
+            if (comparisonValueOfFirstItem > comparisonValueOfSecondItem) { 
+                if (reversed){ result = -1;}
+                else         { result =  1; }
+            }
+            else if (comparisonValueOfFirstItem < comparisonValueOfSecondItem) { 
+                if (reversed){ result =  1;}
+                else         { result = -1; }
+            }
             else {
                 if (comparatorFunction.nextStep != undefined) {  result = comparatorFunction.nextStep(firstItem, secondItem); } 
                 else { result = 0; }

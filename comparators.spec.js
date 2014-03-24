@@ -44,6 +44,30 @@ describe("Comparators", function(){
             var actual = beforeSort.sort(comparatorMethod);
             expect(actual).toEqual(expected);
         })
+
+        // Reversing comparison direction
+        // -------------------------------
+        it("accepts a second options parameter that allows reversing comparison results", function(){
+            var shouldBeFirst  = {"name": "C", dob: "2000-03-03"},
+                shouldBeSecond = {"name": "B", dob: "2000-02-02"},
+                shouldBeThird  = {"name": "A", dob: "2000-01-01"};
+
+            // Sometimes, you want to sort things in reverse order.
+            // This can be done by including an options object as a second parameter, with `reversed` set to `true`
+            // In this example, we want to sort by name in reverse order.
+            var comparatorMethod = Comparators.comparing('name', {reversed: true});
+
+            var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird];
+            var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
+            var actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+
+            var comparatorMethod = Comparators.comparing(function(each){
+                return new Date(each.dob);
+            }, {reversed: true});
+            actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+       });
     });
 
     describe(".thenComparing(attr|fn)", function(){
