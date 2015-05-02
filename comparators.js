@@ -40,13 +40,13 @@
         };
 
         var lastStepInComparisonChain = comparatorFunction;
-        comparatorFunction.thenComparing = function(attrOrFunction){
-            lastStepInComparisonChain = lastStepInComparisonChain.nextStep = buildComparisonStep(attrOrFunction);
+        comparatorFunction.thenComparing = function(attrOrFunction, opts){
+            lastStepInComparisonChain = lastStepInComparisonChain.nextStep = buildComparisonStep(attrOrFunction, opts);
             return this;
-        }
+        };
 
         return comparatorFunction;
-    }
+    };
 
     return { comparing: buildComparisonStep };
 }));
