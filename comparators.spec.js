@@ -43,7 +43,7 @@ describe("Comparators", function(){
             var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
             var actual = beforeSort.sort(comparatorMethod);
             expect(actual).toEqual(expected);
-        })
+        });
 
         // Reversing comparison direction
         // -------------------------------
@@ -108,7 +108,7 @@ describe("Comparators", function(){
             var beforeSort = [shouldBeSecond, shouldBeFirst, shouldBeThird];
             var actual = beforeSort.sort(comparatorMethod);
             expect(actual).toEqual(expected);
-        })
+        });
 
         // Multiple chains
         // ---------------
@@ -122,7 +122,26 @@ describe("Comparators", function(){
             var shouldBeFirst   = {lastName: "A", firstName: "A", age:24},
                 shouldBeSecond  = {lastName: "A", firstName: "A", age:25},
                 shouldBeThird   = {lastName: "A", firstName: "B", age:24},
-                shouldBeFourth  = {lastName: "B", firstName: "A", age:24}
+                shouldBeFourth  = {lastName: "B", firstName: "A", age:24};
+
+            var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird, shouldBeFourth];
+            var beforeSort = [shouldBeThird, shouldBeFourth, shouldBeSecond, shouldBeFirst];
+            var actual = beforeSort.sort(comparatorMethod);
+            expect(actual).toEqual(expected);
+        });
+
+        // Multiple chains
+        // ---------------
+        it("can chain multiple comparison keys with mixed directions", function(){
+            // Any point in the chain can be sorted in normal or reverse order.
+            var comparatorMethod = Comparators.comparing("lastName")
+                                                .thenComparing("firstName", {reversed: true})
+                                                .thenComparing("age");
+
+            var shouldBeFirst  = {lastName: "A", firstName: "B", age:24},
+                shouldBeSecond = {lastName: "A", firstName: "A", age:24},
+                shouldBeThird  = {lastName: "A", firstName: "A", age:25},
+                shouldBeFourth = {lastName: "B", firstName: "A", age:24};
 
             var expected   = [shouldBeFirst, shouldBeSecond, shouldBeThird, shouldBeFourth];
             var beforeSort = [shouldBeThird, shouldBeFourth, shouldBeSecond, shouldBeFirst];
