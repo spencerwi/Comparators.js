@@ -1,0 +1,30 @@
+{
+  "name": "comparators",
+  "version": "1.2.0",
+  "repository": {
+      "type": "git",
+      "url" : "https://github.com/spencerwi/Comparators.js.git"
+  },
+  "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
+  "main": [
+      "comparators.min.js",
+      "comparators.js"
+  ],
+  "keywords": [
+    "comparator",
+    "sort",
+    "array"
+  ],
+  "authors": [ "Spencer Williams <spencerwi@gmail.com>"],
+  "license": "MIT",
+  "moduleType": [
+      "amd",
+      "globals",
+      "node"
+  ],
+  "ignore": [
+      "**/*",
+      "node_modules",
+      "spec"
+  ]
+}
