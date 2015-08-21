@@ -1,5 +1,7 @@
 declare module Comparators {
-  type KeyExtractorFn<T> = (x: T)=>any;
+  interface KeyExtractorFn<T> {
+      (x: T): any;
+  }
   interface ComparatorsStatic {
     comparing<T>(attrOrFunction: string|KeyExtractorFn<T>, opts?: ComparatorOptions): Comparator<T>;
   }
