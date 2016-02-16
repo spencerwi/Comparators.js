@@ -1,6 +1,6 @@
 {
   "name": "comparators",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "repository": {
       "type": "git",
       "url" : "https://github.com/spencerwi/Comparators.js.git"
@@ -8,7 +8,8 @@
   "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
   "main": [
       "dist/comparators.min.js",
-      "dist/comparators.js"
+      "dist/comparators.js",
+      "src/comparators.ts"
   ],
   "typescript": "dist/comparators.d.ts",
   "keywords": [
@@ -23,8 +24,5 @@
       "globals",
       "node"
   ],
-  "ignore": [
-      "test/*",
-      "node_modules"
-  ]
+  "ignore": [ "node_modules" ]
 }
