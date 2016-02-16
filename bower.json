@@ -24,8 +24,7 @@
       "node"
   ],
   "ignore": [
-      "**/*",
-      "node_modules",
-      "spec"
+      "test/*",
+      "node_modules"
   ]
 }
