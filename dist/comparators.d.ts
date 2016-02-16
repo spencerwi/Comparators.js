@@ -9,5 +9,5 @@ export interface Comparator<T> {
     thenComparing?(attrOrFunction: string | KeyExtractorFn<T>, opts?: ComparatorOptions): Comparator<T>;
 }
 export default class Comparators {
-    static comparing<T>(attrOrFunction: KeyExtractorFn<T>, opts?: ComparatorOptions): Comparator<T>;
+    static comparing<T>(attrOrFunction: string | KeyExtractorFn<T>, opts?: ComparatorOptions): Comparator<T>;
 }

@@ -48,7 +48,7 @@ var buildComparisonStep = < T >(attrOrFunction: string|KeyExtractorFn<T>, opts:C
 }
 
 export default class Comparators {
-    public static comparing<T>(attrOrFunction: KeyExtractorFn<T>, opts?: ComparatorOptions) {
+    public static comparing<T>(attrOrFunction: string|KeyExtractorFn<T>, opts?: ComparatorOptions) {
         return buildComparisonStep<T>(attrOrFunction, opts);
     }
 }
