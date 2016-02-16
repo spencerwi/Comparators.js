@@ -1,6 +1,6 @@
 {
   "name": "comparators",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/spencerwi/Comparators.js.git"
@@ -14,9 +14,9 @@
     "array"
   ],
   "scripts": {
-      "pretest": "tsc",
-      "test": "node test/comparators.spec.js",
-      "posttest": "uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
+    "pretest": "tsc",
+    "test": "node test/comparators.spec.js",
+    "posttest": "uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
   },
   "author": "Spencer Williams",
   "license": "MIT",
