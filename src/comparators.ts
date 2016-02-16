@@ -24,8 +24,8 @@ var buildComparisonStep = < T >(attrOrFunction: string|KeyExtractorFn<T>, opts:C
             comparisonValueOfFirstItem  = attrOrFunction(firstItem);
             comparisonValueOfSecondItem = attrOrFunction(secondItem);
         } else {
-            comparisonValueOfFirstItem = firstItem[attrOrFunction];
-            comparisonValueOfSecondItem = secondItem[attrOrFunction];
+            comparisonValueOfFirstItem = firstItem[<string>attrOrFunction];
+            comparisonValueOfSecondItem = secondItem[<string>attrOrFunction];
         }
         if (comparisonValueOfFirstItem > comparisonValueOfSecondItem) {
             if (reversed) { result = -1; }
