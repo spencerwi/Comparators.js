@@ -1,15 +1,16 @@
 {
   "name": "comparators",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "repository": {
       "type": "git",
       "url" : "https://github.com/spencerwi/Comparators.js.git"
   },
   "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
   "main": [
-      "comparators.min.js",
-      "comparators.js"
+      "dist/comparators.min.js",
+      "dist/comparators.js"
   ],
+  "typescript": "dist/comparators.d.ts",
   "keywords": [
     "comparator",
     "sort",

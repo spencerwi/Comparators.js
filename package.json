@@ -1,25 +1,27 @@
 {
   "name": "comparators",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "repository": {
-      "type": "git",
-      "url" : "https://github.com/spencerwi/Comparators.js.git"
+    "type": "git",
+    "url": "https://github.com/spencerwi/Comparators.js.git"
   },
   "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
-  "main": "comparators.js",
-  "scripts": {
-    "test": "jasmine-node comparators.spec.js",
-    "minify": "uglifyjs comparators.js -m -r 'require,module,exports,define,amd,comparing,thenComparing' -o comparators.min.js --preamble='/* Comparators.js 1.0.0\n * http://spencerwi.github.io/Comparators.js\n * (c) 2014 Spencer Williams\n * Comparators.js may be freely distributed under the MIT license. */'"
-  },
+  "main": "dist/comparators.js",
+  "typings": "dist/comparators.d.ts",
   "keywords": [
     "comparator",
     "sort",
     "array"
   ],
+  "scripts": {
+      "pretest": "tsc",
+      "test": "node test/comparators.spec.js",
+      "posttest": "uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
+  },
   "author": "Spencer Williams",
   "license": "MIT",
   "devDependencies": {
-    "jasmine-node": "~1.13.1",
-    "uglify-js"   : "~2.4.0"
+    "painless": "^0.9.1",
+    "uglify-js": "2.x"
   }
 }
