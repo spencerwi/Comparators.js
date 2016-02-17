@@ -15,8 +15,8 @@
   ],
   "scripts": {
     "pretest": "./node_modules/typescript/bin/tsc",
-    "test": "node test/comparators.spec.js",
-    "posttest": "uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
+    "test": "./node_modules/painless/bin/painless -r spec test/comparators.spec.js",
+    "posttest": "./node_modules/uglify-js/bin/uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
   },
   "author": "Spencer Williams",
   "license": "MIT",

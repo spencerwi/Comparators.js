@@ -3,11 +3,13 @@
 var Comparators = require("../dist/comparators").default;
 var painless = require('painless');
 var assert = painless.assert;
-var test = painless.createGroup();
+
+var comparatorsComparing = painless.createGroup("Comparators.comparing(attr|fn)");
+var comparatorThenComparing = painless.createGroup(".thenComparing(attr|fn)");
 
 // Creating an "attr" comparator
 // -----------------------------
-test("Comparators.comparing(attr|fn) accepts a string specifying the name of the attribute to use for comparison", function(){
+comparatorsComparing("accepts a string specifying the name of the attribute to use for comparison", function(){
     var shouldBeFirst  = {"name": "A"},
     shouldBeSecond = {"name": "B"},
     shouldBeThird  = {"name": "C"};
@@ -25,7 +27,7 @@ test("Comparators.comparing(attr|fn) accepts a string specifying the name of the
 });
 // Creating a "fn" comparator
 // --------------------------
-test("Comparators.comparing accepts an 'attribute-extractor' function that returns the attribute to use for comparison", function(){
+comparatorsComparing("accepts an 'attribute-extractor' function that returns the attribute to use for comparison", function(){
     var shouldBeFirst  = {"name": "short"},
     shouldBeSecond = {"name": "pretty long"},
     shouldBeThird  = {"name": "definitely the longest"};
@@ -45,7 +47,7 @@ test("Comparators.comparing accepts an 'attribute-extractor' function that retur
 
 // Reversing comparison direction
 // -------------------------------
-test("Comparators.comparing accepts a second options parameter that allows reversing comparison results", function(){
+comparatorsComparing("accepts a second options parameter that allows reversing comparison results", function(){
     var shouldBeFirst  = {"name": "C", dob: "2000-03-03"},
     shouldBeSecond = {"name": "B", dob: "2000-02-02"},
     shouldBeThird  = {"name": "A", dob: "2000-01-01"};
@@ -69,7 +71,7 @@ test("Comparators.comparing accepts a second options parameter that allows rever
 
 // Chaining with an "attr" comparator
 // ----------------------------------
-test(".thenComparing chains from '.comparing(attr|fn)' and accepts an attribute-name string", function(){
+comparatorThenComparing("chains from '.comparing(attr|fn)' and accepts an attribute-name string", function(){
     // As with `.comparing(attr)`, we can specify a comparison-key attribute just by passing in the
     //  attribute name as a string.
     // The advantage of `thenComparing(attr)` is that it lets us easily define a hierarchical multi-key sort.
@@ -87,7 +89,7 @@ test(".thenComparing chains from '.comparing(attr|fn)' and accepts an attribute-
 });
 // Chaining with a "fn" comparator
 // -------------------------------
-test(".thenComparing chains from '.comparing(attr|fn)' and accepts an attribute-extractor function", function(){
+comparatorThenComparing("chains from '.comparing(attr|fn)' and accepts an attribute-extractor function", function(){
     // And as with `.comparing(fn)`, we can pass in a function that returns the comparison key
     //  when given each element of the method as a parameter. Functors are neat!
     //
@@ -108,7 +110,7 @@ test(".thenComparing chains from '.comparing(attr|fn)' and accepts an attribute-
 
 // Multiple chains
 // ---------------
-test(".thenComparing can chain multiple comparison keys", function(){
+comparatorThenComparing("can chain multiple comparison keys", function(){
     // Any point in the chain can be further chained, allowing you to easily
     //  create complex, multi-attribute comparison functions.
     var comparatorMethod = Comparators.comparing("lastName")
@@ -128,7 +130,7 @@ test(".thenComparing can chain multiple comparison keys", function(){
 
 // Multiple chains
 // ---------------
-test(".thenComparing can chain multiple comparison keys with mixed directions", function(){
+comparatorThenComparing("can chain multiple comparison keys with mixed directions", function(){
     // Any point in the chain can be sorted in normal or reverse order.
     var comparatorMethod = Comparators.comparing("lastName")
         .thenComparing("firstName", {reversed: true})
