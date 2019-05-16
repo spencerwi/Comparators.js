@@ -64,7 +64,7 @@ The simplest (but global-namespace-polluting) way to use it is to include `compa
 In node/CommonJS loaders, just `require` it (it's available on NPM as [`comparators`](https://www.npmjs.org/package/comparators)):
 
 ```javascript
-var Comparators = require("comparators");
+var Comparators = require("comparators").default; // the .default is necessary because of how Typescript compiles to commonjs
 ```
 
 It works similarly in AMD loaders ([require.js](http://requirejs.org) used in the below example):
