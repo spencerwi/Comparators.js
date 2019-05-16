@@ -52,3 +52,7 @@ export default class Comparators {
         return buildComparisonStep<T>(attrOrFunction, opts);
     }
 }
+
+if (!("undefined" === typeof window)) {
+    window["Comparators"] = Comparators;
+}

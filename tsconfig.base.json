@@ -1,12 +1,9 @@
 {
     "compilerOptions": {
-        "module": "umd",
         "target": "es5",
         "noImplicitAny": false,
         "inlineSourceMap": true,
-        "inlineSources": true,
-        "declaration": true,
-        "outDir": "dist"
+        "inlineSources": true
     },
     "exclude": [
         "node_modules"

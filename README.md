@@ -9,9 +9,9 @@ Java8-style chainable comparators for Javascript
 Raison d'être
 -------------
 
-At [work](http://siftit.com/), I've run across situations where I need multi-key sorting in my Backbone collections  -- which can sort themselves using the same type of comparator function as [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) expects.
+In working with JS, I've run across situations where I need multi-key sorting in my Backbone collections  -- which can sort themselves using the same type of comparator function as [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) expects.
 
-Recently, I'd played some with Java 8 and liked the new [Comparator](http://download.java.net/jdk8/docs/api/java/util/Comparator.html) interface and the way it allows chaining comparators for multi-attribute sort like this:
+When Java 8 rolled out, it brought with it a [Comparator](http://download.java.net/jdk8/docs/api/java/util/Comparator.html) interface, that allowed chaining comparators for multi-attribute sort like this:
 
 ```java
 people.sort(
@@ -20,7 +20,7 @@ people.sort(
 );
 ```
 
-So the simplest solution for me was to bridge this need and this interest by writing a Javascript comparator-function generator with the same(ish) syntax as the upcoming Java8 Comparator interface.
+I really liked that approach, so I brought that into Javascript with the same(ish) syntax. That's this library.
 
 
 Usage and examples
@@ -47,7 +47,7 @@ sortedPeople = people.sort(Comparators.comparing("lastName").thenComparing("firs
 */
 ```
 
-For more examples (and tests!), see the [project page](http://spencerwi.github.io/Comparators.js)
+For more examples, see the tests in `test/comparators.spec.js`.
 
 
 Where and how can I use it?

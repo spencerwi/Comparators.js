@@ -1,28 +1,32 @@
 {
   "name": "comparators",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/spencerwi/Comparators.js.git"
   },
   "description": "Provides chainable comparator-function generators a la Java 8 Comparators",
-  "main": "dist/comparators.js",
-  "typings": "dist/comparators.d.ts",
+  "main": "dist/commonjs/comparators.js",
+  "typings": "dist/commonjs/comparators.d.ts",
   "keywords": [
     "comparator",
     "sort",
     "array"
   ],
   "scripts": {
-    "pretest": "./node_modules/typescript/bin/tsc",
-    "test": "./node_modules/painless/bin/painless -r spec test/comparators.spec.js",
-    "posttest": "./node_modules/uglify-js/bin/uglifyjs dist/comparators.js --compress -o dist/comparators.min.js"
+    "pretest": "tsc -p tsconfig.commonjs.json && rollup -c rollup.config.js",
+    "test": "echo 'CLI test: ' && mocha test/comparators.spec.js && echo 'Browser test: ' && mocha-chrome browser-test.html",
+    "posttest": "uglifyjs dist/umd/comparators.js --compress -o dist/umd/comparators.min.js"
   },
   "author": "Spencer Williams",
   "license": "MIT",
   "devDependencies": {
-    "painless": "^0.9.1",
-    "typescript": "^1.7.5",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "mocha-chrome": "^2.0.0",
+    "rollup": "^1.12.1",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "typescript": "^3.4.0",
     "uglify-js": "2.x"
   }
 }
