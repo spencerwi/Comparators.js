@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "noImplicitAny": false,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+		"experimentalDecorators": true,
+		"esModuleInterop": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "files": [ "test/typescript-definition-file.spec.ts" ]
+}

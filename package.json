@@ -1,6 +1,6 @@
 {
   "name": "comparators",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/spencerwi/Comparators.js.git"
@@ -15,15 +15,19 @@
   ],
   "scripts": {
     "pretest": "tsc -p tsconfig.commonjs.json && rollup -c rollup.config.js",
-    "test": "echo 'CLI test: ' && mocha test/comparators.spec.js && echo 'Browser test: ' && mocha-chrome browser-test.html",
+    "test-cli": "echo 'CLI test: ' && mocha test/comparators.spec.js && echo 'Typescript CLI test: ' && tsc -p tsconfig.test.json && mocha test/typescript-definition-file.spec.js",
+    "test-browser": "echo 'Browser test: ' && mocha-chrome browser-test.html",
+    "test": "npm run test-cli && npm run test-browser",
     "posttest": "uglifyjs dist/umd/comparators.js --compress -o dist/umd/comparators.min.js"
   },
   "author": "Spencer Williams",
   "license": "MIT",
   "devDependencies": {
+    "@types/chai": "^4.2.3",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "mocha-chrome": "^2.0.0",
+    "mocha-typescript": "^1.1.17",
     "rollup": "^1.12.1",
     "rollup-plugin-typescript2": "^0.21.0",
     "typescript": "^3.4.0",
