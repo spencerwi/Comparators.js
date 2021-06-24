@@ -1,8 +1,3 @@
-// Comparators.js
-// ==============
-var Comparators = require("../dist/commonjs/comparators").default;
-var assert = require('assert');
-
 describe('Comparators.comparing(attr|fn)', function() {
     // Creating an "attr" comparator
     // -----------------------------

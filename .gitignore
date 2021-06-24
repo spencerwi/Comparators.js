@@ -1,3 +1,5 @@
 .swp
 node_modules/
 .rpt2_cache/
+test/comparators.spec.cli.js
+test/comparators.spec.browser.js

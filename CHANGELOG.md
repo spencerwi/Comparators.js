@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.3] - 2021-06-23
+### Changed
+ - Pretty much the entire way that tests are run, so that I could clean out some vulnerable dependencies
+
 ## [3.0.2] - 2019-09-19
 ### Added
  - Tests that exercise typescript usage (via `mocha-typescript`, see `test/typescript-definition-file.spec.ts`)

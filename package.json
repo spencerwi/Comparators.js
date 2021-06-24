@@ -1,6 +1,6 @@
 {
   "name": "comparators",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/spencerwi/Comparators.js.git"
@@ -15,19 +15,24 @@
   ],
   "scripts": {
     "pretest": "tsc -p tsconfig.commonjs.json && rollup -c rollup.config.js",
-    "test-cli": "echo 'CLI test: ' && mocha test/comparators.spec.js && echo 'Typescript CLI test: ' && tsc -p tsconfig.test.json && mocha test/typescript-definition-file.spec.js",
-    "test-browser": "echo 'Browser test: ' && mocha-chrome browser-test.html",
+	"prep-cli-test": "echo 'var Comparators = require(\"../dist/commonjs/comparators\").default;\nvar assert = require(\"assert\");\n' >test/comparators.spec.cli.js && cat test/base_spec.js >>test/comparators.spec.cli.js", 
+    "test-cli": "npm run prep-cli-test && echo 'CLI test: ' && mocha test/comparators.spec.cli.js && echo 'Typescript CLI test: ' && tsc -p tsconfig.test.json && mocha test/typescript-definition-file.spec.js",
+	"prep-browser-test": "echo 'var assert = chai.assert;\n' >test/comparators.spec.browser.js && cat test/base_spec.js >>test/comparators.spec.browser.js",
+    "test-browser": "npm run prep-browser-test && echo 'Browser test: ' && karma start karma.config.js",
     "test": "npm run test-cli && npm run test-browser",
     "posttest": "uglifyjs dist/umd/comparators.js --compress -o dist/umd/comparators.min.js"
   },
   "author": "Spencer Williams",
   "license": "MIT",
   "devDependencies": {
+    "@testdeck/mocha": "^0.1.2",
     "@types/chai": "^4.2.3",
-    "chai": "^4.2.0",
-    "mocha": "^6.1.4",
-    "mocha-chrome": "^2.0.0",
-    "mocha-typescript": "^1.1.17",
+    "chai": "^4.3.0",
+    "karma": "^6.3.4",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-mocha": "^2.0.1",
+    "mocha": "^9.0.0",
+    "puppeteer": "^10.0.0",
     "rollup": "^1.12.1",
     "rollup-plugin-typescript2": "^0.21.0",
     "typescript": "^3.4.0",

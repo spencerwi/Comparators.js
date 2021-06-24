@@ -1,6 +1,6 @@
 import { Comparator } from "../dist/commonjs/comparators";
 import Comparators from "../dist/commonjs/comparators";
-import { suite, test } from "mocha-typescript";
+import { suite, test } from "@testdeck/mocha";
 import { expect } from "chai";
 
 type HasName = {name : string}
