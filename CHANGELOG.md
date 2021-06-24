@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.3] - 2021-06-23
 ### Changed
  - Pretty much the entire way that tests are run, so that I could clean out some vulnerable dependencies
+### Removed
+ - bower.json, since I haven't been publishing to bower for a while, and I don't know if bower's even a thing anymore
 
 ## [3.0.2] - 2019-09-19
 ### Added
