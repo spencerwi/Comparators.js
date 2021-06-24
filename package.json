@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "pretest": "tsc -p tsconfig.commonjs.json && rollup -c rollup.config.js",
-	"prep-cli-test": "echo 'var Comparators = require(\"../dist/commonjs/comparators\").default;\nvar assert = require(\"assert\");\n' >test/comparators.spec.cli.js && cat test/base_spec.js >>test/comparators.spec.cli.js", 
+	"prep-cli-test": "cat test/spec_header_cli.js test/base_spec.js >test/comparators.spec.cli.js", 
     "test-cli": "npm run prep-cli-test && echo 'CLI test: ' && mocha test/comparators.spec.cli.js && echo 'Typescript CLI test: ' && tsc -p tsconfig.test.json && mocha test/typescript-definition-file.spec.js",
-	"prep-browser-test": "echo 'var assert = chai.assert;\n' >test/comparators.spec.browser.js && cat test/base_spec.js >>test/comparators.spec.browser.js",
+	"prep-browser-test": "cat test/spec_header_browser.js test/base_spec.js >test/comparators.spec.browser.js",
     "test-browser": "npm run prep-browser-test && echo 'Browser test: ' && karma start karma.config.js",
     "test": "npm run test-cli && npm run test-browser",
     "posttest": "uglifyjs dist/umd/comparators.js --compress -o dist/umd/comparators.min.js"

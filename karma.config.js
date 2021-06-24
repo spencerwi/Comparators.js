@@ -18,7 +18,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
 	  'node_modules/chai/chai.js',
-	  'dist/umd/comparators.min.js',
+	  'dist/umd/comparators.js',
       'test/comparators.spec.browser.js'
     ],
 
