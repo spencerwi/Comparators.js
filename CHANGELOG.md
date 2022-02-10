@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.5] - 2022-02-10
+### Changed
+ - Updates to package-lock.json so that I'm not referencing vulnerable dependencies
+ - Slight tweak to the README, nothing really functional though.
+
 ## [3.0.4] - 2022-02-01
 ### Changed
  - Just updated some dependencies around the testing/compilation toolchain, nothing user-facing, but now you might not 
