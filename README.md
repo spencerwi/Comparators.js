@@ -9,7 +9,7 @@ Raison d'être
 
 In working with JS, I've run across situations where I need multi-key sorting in my Backbone collections  -- which can sort themselves using the same type of comparator function as [`Array.prototype.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) expects.
 
-When Java 8 rolled out, it brought with it a [Comparator](http://download.java.net/jdk8/docs/api/java/util/Comparator.html) interface, that allowed chaining comparators for multi-attribute sort like this:
+When Java 8 rolled out, it brought with it some useful enhancements to the existing [Comparator](http://download.java.net/jdk8/docs/api/java/util/Comparator.html) interface to allow chaining comparators for multi-attribute sort like this:
 
 ```java
 people.sort(
